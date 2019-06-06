@@ -60,4 +60,4 @@ function getGender(customers, gender) {
 
 run(url) //Run the main code
 
-module.exports = getGender, getAnimal;
+module.exports = { getGender, getAnimal };

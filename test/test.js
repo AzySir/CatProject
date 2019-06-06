@@ -1,68 +1,69 @@
-var expect = require("chai");
-var mocha = require("mocha");
-var axios = require('axios');
-var assert = require('assert');
-// var getAnimal = require('./index.js').getAnimal;
-// import getGender from './index.js';
-var getGender = require('../index.js');
+const axios = require('axios');
+const { getAnimal, getGender } = require('../index')
+const jestinc = require('jest');
 
 var mockGreen = [
     {
-      "name": "Adam",
-      "gender": "Male",
-      "age": 27,
-      "pets": [
+      name: "Adam",
+      gender: "Male",
+      age: 27,
+      pets: [
         {
-          "name": "Lloyd",
-          "type": "Dog"
+          name: "Lloyd",
+          type: "Dog"
         },
         {
-          "name": "Whiskers",
-          "type": "Cat"
+          name: "Whiskers",
+          type: "Cat"
         }
       ]
     }
-]
+];
 
 var mockRed = [
-    {
-      "name": "Ashton",
-      "gender": "Male",
-      "age": 37,
-      "pets": [
-        {
-          "name": "Bananas",
-          "type": "Monkey"
-        },
-        {
-          "name": "Dumbo",
-          "type": "Elephant"
-        }
-      ]
-    }
+  {
+    name: "Ashton",
+    gender: "Male",
+    age: 37,
+    pets: [
+      {
+        name: "Bananas",
+        type: "Monkey"
+      },
+      {
+        name: "Dumbo",
+        type: "Elephant"
+      }
+    ]
+  }
 ]
 
-describe('API Service working', function() {
-require('http').request()
-    it("returns status 200", function() {
-        var url = "http://agl-developer-test.azurewebsites.net/people.json"
-        axios.get(url, function(error, response, body) {
-            expect(response.statusCode).to.equal(200);
-        });
-    });
-});
+describe('#1 Test Suite', () => {
 
-describe('getAnimal() test...', function() {
-    it("Returns an array", function() {
-        var result = getGender(mockGreen, "cat");
-        var count = result.length;
-        expect(result).to.be.above(0);
+  describe('getGender() test...', () => {
+      it("Returns an array", async () => {
+          let result = await getGender(mockGreen, 'Male');
+          let count = result.length;
+          Promise.all([result, count])
+          .then(() => {
+            expect(count).toBeGreaterThan(0);
+          }
+          )
+      });
+  });  
+
+  describe("getAnimal() test...", () => {
+    it("Returns an array", async () => {
+        let result = await getAnimal(mockRed, 'Cat');
+        let count = result.length;
+        Promise.all([result, count])
+        .then(() => {
+          expect(count).toBeLessThanOrEqual(0);
+        }
+        )
     });
-});
-describe('getPet() test...', function() {
-    it("Returns an array", function() {
-        var result = getAnimal(mockGreen, cat);
-        var count = result.length;
-        expect(result).to.be.above(0);
-    });
-});
+  })
+
+
+})
+    

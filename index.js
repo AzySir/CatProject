@@ -2,9 +2,8 @@ var axios = require('axios'); //Include Axios Library for JS handling
 const url = "http://agl-developer-test.azurewebsites.net/people.json"; //Set API 
 const selectedPet = "Cat" //Change this configuration variable to get the Pet of your selection
 
-
-
-function run(url) {    axios.get(url) //Get API 
+function run(url) {
+    axios.get(url) //Get API 
     .then(response => { //Then do -
         maleArray = getGender(response.data, "Male"); //Set Male Genders into an Array
         femaleArray = getGender(response.data, "Female"); //Set Female Genders into an Array
@@ -61,4 +60,4 @@ function getGender(customers, gender) {
 
 run(url) //Run the main code
 
-module.exports = getAnimal
+module.exports = { getGender, getAnimal };

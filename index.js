@@ -10,18 +10,16 @@ function run(url) {
     .then(response => {
         maleArray = getGender(response.data, response.data.length, "Male");
         femaleArray = getGender(response.data, response.data.length, "Female");
+ 
+        catMaleArray = getCat(maleArray);
+        catFemaleArray = getCat(femaleArray);
 
+        sortedMaleArray = sortAlphabetical(catMaleArray);
+        sortedFemaleArray = sortAlphabetical(catFemaleArray);
 
-        console.log("----- Male Cat -----")
-        sortedMaleArray = getCat(maleArray);
-        console.log("----- END OF Male Cat -----")
-        console.log("----- Female Cat -----")
-        sortedFemaleArray = getCat(femaleArray);
-        console.log("----- END Of Female Cat -----")
-
-        // sortedMaleArray = sortAlphabetical(maleArray);
-        // sortedFemaleArray = sortAlphabetical(femaleArray);
-        
+        displayCats("Male", sortedMaleArray)
+        console.log("      ")
+        displayCats("Female", sortedFemaleArray)
     })
 }
 
@@ -37,34 +35,42 @@ function run(url) {
 
   function getCat(custJSON) {
     catArray = []
-    petsArray = getPets(custJSON);
     petTypeArray = []; 
-    for (var i = 0; i < petsArray.length; i++) {
-        petTypeArray.push(petsArray[i].pets);
+    petArray = getPet(custJSON);
+    for (var i = 0; i < petArray.length; i++) {
+           for (var j = 0; j < petArray[i].pets.length; j++) {
+                if (petArray[i].pets[j].type == "Cat") {
+                    catArray.push(petArray[i].pets[j].name);
+                }    
+           }
     }
-
     
+    return catArray;
   }
 
-  function getPets(custJSON) {
-    petsArray = [];
+  function getPet(custJSON) {
+    petArray = [];
     var count = 0;
     for (var i = 0; i < custJSON.length; i++) {
         if (custJSON[i].pets != null) {
-            petsArray.push(custJSON[i]);
+            petArray.push(custJSON[i]);
         }
         else {
             count++;
         }
     }
-
-    console.log(petsArray)
-    return petsArray;
+    return petArray;
   }
 
+  function sortAlphabetical(sortGenderArr) {
+    return sortGenderArr.sort();
+  }
 
-  
-  
-
+  function displayCats(gender, catArr) {
+    console.log(gender)
+    for (var i = 0; i < catArr.length; i++) {
+        console.log(" * " + catArr[i]);
+    }
+  }
 
 run(url)

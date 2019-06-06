@@ -11,6 +11,7 @@
     "mocha": "^6.1.4"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
   },
   "repository": {

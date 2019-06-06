@@ -30,9 +30,5 @@
   "homepage": "https://github.com/AzySir/CatProject#readme"
 }
 ```
-2) To start project
-```npm start```
-3) To test - 
-``` 
-npm test
-```
+2) To start project ```npm start```
+3) To test ``` npm test ```

@@ -43,42 +43,33 @@ function run(url) {
     petArray = getPet(custJSON); //get petArray
     for (var i = 0; i < petArray.length; i++) { //Loop through Customer Array
            for (var j = 0; j < petArray[i].pets.length; j++) { //Loop through the Pets details
-                if (petArray[i].pets[j].type.toLocaleLowerCase() == animal.toLocaleLowerCase()) { //If pet Type == cat
-                    animalArray.push(petArray[i].pets[j].name);
+                if (petArray[i].pets[j].type.toLocaleLowerCase() == animal.toLocaleLowerCase()) { //If pet Type == animal in the config also make all strings lowercase
+                    animalArray.push(petArray[i].pets[j].name); //Add to pet's name to array
                 }    
            }
     }
     
-    return animalArray;
+    return animalArray; //return array to run() 
   }
 
   function getPet(custJSON) {
-    petArray = [];
-    var count = 0;
-    for (var i = 0; i < custJSON.length; i++) {
-        if (custJSON[i].pets != null) {
-            petArray.push(custJSON[i]);
-        }
-        else {
-            count++;
+    petArray = []; //init Array
+    for (var i = 0; i < custJSON.length; i++) { //Loop through Customer JSON 
+        if (custJSON[i].pets != null) { //If Customer JSON is not null(have a pet) then
+            petArray.push(custJSON[i]);  //Push to array
         }
     }
-    return petArray;
+    return petArray; //return list of pets 
   }
 
-  function sortAlphabetical(sortGenderArr) {
-    return sortGenderArr.sort();
+  function sortAlphabetical(sortArray) {
+    return sortArray.sort(); //Sort Array by alphabetical for pet's name
   }
 
-  function displayCats(gender, catArr) {
-    if (catArr == null) {
-        console.log(Gender + " has nothing to show as there was no Cat's detected")
-    }
-    else {
-        console.log(gender)
-        for (var i = 0; i < catArr.length; i++) {
-            console.log(" * " + catArr[i]);
-        }
+  function displayCats(gender, petArr) {
+    console.log(gender) // ** Displays the gender as the Heading **
+    for (var i = 0; i < petArr.length; i++) { //Loop Through the Pet Array
+        console.log(" * " + petArr[i]); //Display Pets 
     }
   }
 

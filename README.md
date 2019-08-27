@@ -1,5 +1,5 @@
 # CatProject
-1) Pre requisitese 
+1) Pre requisite 
 - Ensure the package.json is as below
 ```
 {
